@@ -11,3 +11,4 @@ class Config:
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_DATABASE_URI = "mariadb+pymysql://root:@localhost:3306/commentsdb"
     CORS_HEADERS = "Content-type"
+    JWT_SECRET_KEY = os.getenv("JWT_SECRET_KEY")

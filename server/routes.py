@@ -1,7 +1,36 @@
 from app import app, db, bcrypt
 from flask import jsonify, request
 from models import User
+from flask_jwt_extended import (
+    create_access_token,
+    jwt_required,
+    unset_access_cookies,
+)
 
+@app.route("/token", methods=["POST"])
+def create_token():
+    data = request.get_json()
+    
+    user = User.query.filter_by(username=data.get("username")).first()
+    
+    if user is None:
+        return jsonify({"error": "Invalid username"}), 401
+    if not bcrypt.check_password_hash(user.password, data.get("password")):
+        return jsonify({"error": "Invalid password"}), 401
+    
+    access_token = create_access_token(identity=user.user_id)
+    
+    return jsonify({"access_token":  access_token}), 200
+
+
+@app.route("/profile", methods=["GET"])
+def get_profile():
+    pass
+
+
+@app.route("/logout", methods=["POST"])
+def logout_user():
+    pass
 
 
 @app.route("/", methods=["GET"])
