@@ -1,78 +1,80 @@
-html, body {
-    height: 100%;
+body {
+    background-color: #0D3B4C;
+    font-family: 'Arial', sans-serif;
+    height: 100vh;
+    display: flex;
     justify-content: center;
-    background-color: #f0f2f5;
-    color: #1c1e21;
+    align-items: center;
+    margin: 0;
 }
 
 .login-form-container {
-    width: 360px;
+    width: 320px;
+    margin: 0 auto;
     padding: 40px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: #1A535C;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     text-align: center;
-    font-family: 'Helvetica', sans-serif;
-    margin: 100px auto;
 }
 
 h2 {
+    color: white;
+    margin-bottom: 30px;
     font-size: 24px;
-    font-weight: bold;
-    color: #1877f2;
-    margin-bottom: 20px;
 }
 
 h1 {
-    font-size: 22px;
-    font-weight: bold;
-    color: green;
-    margin-bottom: 15px;
+    color: #4ECDC4;
+    font-size: 20px;
+    margin-bottom: 20px;
 }
 
 .input-container {
     margin-bottom: 20px;
+    position: relative;
 }
 
-input[type="text"],
-input[type="password"] {
+.input-container input {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #335C67;
+    color: white;
     font-size: 16px;
-    border: 1px solid #dddfe2;
-    border-radius: 6px;
-    box-sizing: border-box;
-    outline: none;
-    background-color: #f5f6f7;
 }
 
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: #1877f2;
-    background-color: white;
+
+.input-container input::placeholder {
+    color: #ffffff99;
 }
 
+
+.login-btn,
 .register-btn {
     width: 100%;
-    padding: 14px;
-    font-size: 18px;
+    padding: 12px;
+    margin-top: 10px;
+    background-color: #FF6B6B;
     color: white;
-    background-color: #1877f2;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
+    font-size: 16px;
     cursor: pointer;
-    font-weight: bold;
     transition: background-color 0.3s ease;
 }
 
+.login-btn:hover,
 .register-btn:hover {
-    background-color: #165ecc;
+    background-color: #E63946;
 }
 
-@media (max-width: 480px) {
-    .login-form-container {
-        width: 100%;
-        padding: 20px;
-        margin: 50px auto;
-    }
+
+.register-btn {
+    background-color: #4ECDC4;
+}
+
+.register-btn:hover {
+    background-color: #3BAC9D;
 }
