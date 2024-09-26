@@ -78,3 +78,22 @@ h1 {
 .register-btn:hover {
     background-color: #3BAC9D;
 }
+
+.alert {
+    width: 100%;
+    padding: 15px;
+    background-color: #FF6B6B; 
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.alert.success {
+    background-color: #4ECDC4; 
+}
+
+.alert.error {
+    background-color: #FF6B6B;
+}

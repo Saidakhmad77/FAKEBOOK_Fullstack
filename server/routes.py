@@ -3,6 +3,7 @@ from flask import jsonify, request
 from models import User
 from flask_jwt_extended import (
     create_access_token,
+    unset_jwt_cookies,
     jwt_required,
     unset_access_cookies,
 )
@@ -27,10 +28,6 @@ def create_token():
 def get_profile():
     pass
 
-
-@app.route("/logout", methods=["POST"])
-def logout_user():
-    pass
 
 
 @app.route("/", methods=["GET"])
@@ -79,3 +76,11 @@ def register_user():
     
     return jsonify(new_user.to_json()), 201
 
+
+
+@app.route("/logout", methods=["POST"])
+def logout_user():
+    response = jsonify({"message": "Logout successful"})
+    unset_jwt_cookies(response)
+    
+    return response, 200

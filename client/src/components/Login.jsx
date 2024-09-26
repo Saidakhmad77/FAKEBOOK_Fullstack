@@ -8,7 +8,7 @@ function Login(){
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const [alertMessage, setAlertMessage] = useState("");
     const [loginSucces, setLoginSuccess] = useState(false);
     const [loginAttempt, setLoginAttempt] = useState(1);
 
@@ -31,15 +31,17 @@ function Login(){
                 password,
             })
             if (response.status === 200) {
-                console.log("Login successful");
                 setToken(response.data.access_token);
-                setLoginSuccess(true)
+                setLoginSuccess(true);
+                setAlertMessage("Login successfull!")
             } else {
                 console.log("Login failed");
+                setAlertMessage("Login failed. Please check your credentials.");
             }
             console.log(response.status);
         } catch (error) {
             console.log(error)
+            setAlertMessage("An error occurred during login. Please try again."); 
         } finally {
             setLoginAttempt(loginAttempt + 1)
             console.log("Logins attempted: " + loginAttempt)
@@ -48,6 +50,8 @@ function Login(){
 
     return(
         <>
+        {/* Display the alert message on top if there's any */}
+        {alertMessage && <div className='alert'>{alertMessage}</div>}
         <div className='login-form-container'>
             <h2>Login</h2>
             {loginSucces && <h1>LOGIN SUCCESSFUL</h1>}
