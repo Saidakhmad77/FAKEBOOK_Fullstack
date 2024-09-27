@@ -24,7 +24,7 @@ function Profile() {
                 }
             } catch (error) {
                 setAlertMessage('An error occurred while fetching profile data.');
-                console.error(error)
+                console.error(error);
             }
         };
 
@@ -34,7 +34,6 @@ function Profile() {
             setAlertMessage('No user is logged in.');
         }
     }, [token]);
-
     return (
         <div className="profile-container">
             {alertMessage && <div className="alert">{alertMessage}</div>}
@@ -43,7 +42,7 @@ function Profile() {
                     <h2>User Profile</h2>
                     <div className="profile-details">
                         <p><strong>Username:</strong> {userData.username}</p>
-                        <p><strong>Password</strong> {userData.password}</p>
+                        <p><strong>Bio:</strong> {userData.bio}</p>
                     </div>
                 </>
             ) : (

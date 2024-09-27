@@ -9,7 +9,7 @@
 .navbar-item {
     list-style: none;
     display: inline-block;
-    margin-right: 20px;
+    margin-left: auto;
 }
 
 .navbar-link {

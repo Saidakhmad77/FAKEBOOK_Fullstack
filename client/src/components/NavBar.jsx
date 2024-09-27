@@ -21,9 +21,9 @@ function NavBar() {
         <div className="navbar-container">
         <nav>
           <ul className="nav-list">
-            <li className="nav-item">
+{/*             <li className="nav-item">
               <Link to="/profile" className="nav-link">Profile</Link>
-            </li>
+            </li> */}
             <li className="nav-item">
               <Link to="/home" className="nav-link">Home</Link>
             </li>

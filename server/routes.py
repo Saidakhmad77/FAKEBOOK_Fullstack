@@ -26,7 +26,17 @@ def create_token():
 
 @app.route("/profile", methods=["GET"])
 def get_profile():
-    pass
+    data = request.get_json()
+    username = data.get("username")
+    bio = data.get("bio")
+    
+    
+    user = User.query.filter_by(username=username, bio=bio)
+
+    if not user:
+        return jsonify({"error": "User not found"}), 404
+
+    return jsonify({"message": "Profile retrieved successfully", "user": user.to_json()}), 200
 
 
 

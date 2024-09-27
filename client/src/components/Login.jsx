@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import UserToken from './UserToken';
 import "./Login.css";
+import { useNavigate } from 'react-router-dom';
 
 
 function Login(){
@@ -11,6 +12,7 @@ function Login(){
     const [alertMessage, setAlertMessage] = useState("");
     const [loginSucces, setLoginSuccess] = useState(false);
     const [loginAttempt, setLoginAttempt] = useState(1);
+    const naigate = useNavigate();
 
     const { token, removeToken, setToken } = UserToken();
 
@@ -33,7 +35,8 @@ function Login(){
             if (response.status === 200) {
                 setToken(response.data.access_token);
                 setLoginSuccess(true);
-                setAlertMessage("Login successfull!")
+                setAlertMessage("Login successfull!");
+                naigate('/profile')
             } else {
                 console.log("Login failed");
                 setAlertMessage("Login failed. Please check your credentials.");
@@ -50,7 +53,6 @@ function Login(){
 
     return(
         <>
-        {/* Display the alert message on top if there's any */}
         {alertMessage && <div className='alert'>{alertMessage}</div>}
         <div className='login-form-container'>
             <h2>Login</h2>
