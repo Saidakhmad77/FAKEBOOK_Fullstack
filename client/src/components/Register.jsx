@@ -11,6 +11,14 @@ function Register() {
     });
 
     const [passwordMatch, setPasswordMatch] = useState(true);
+    const [isPasswordValid, setIsPasswordValid] = useState(true);
+    const [usernameTaken, setUsernameTaken] = useState(false);
+    const [registrationError, setRegistrationError] = useState("");
+
+    const validatePassword = (password) => {
+        const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        return passwordRegex.test(password);
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -19,20 +27,24 @@ function Register() {
             [name]: value,
         }));
 
-        if (name === "confirmPassword") {
-            setPasswordMatch(value === formData.password);
-        } else if (name === "password") {
+        if (name === "password") {
             setPasswordMatch(value === formData.confirmPassword);
+            setIsPasswordValid(validatePassword(value));
+        } else if (name === "confirmPassword") {
+            setPasswordMatch(value === formData.password);
+        }
+
+        if (name === "username") {
+            setUsernameTaken(false);
         }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (passwordMatch) {
-            console.log("Form submitted", formData);
+        if (passwordMatch && isPasswordValid) {
             registerUser(formData);
         } else {
-            console.log("Passwords do not match");
+            console.log("Passwords do not match or password is invalid");
         }
     };
 
@@ -40,8 +52,15 @@ function Register() {
         try {
             const response = await axios.post("http://localhost:5000/register", data);
             console.log(response.data);
+            setRegistrationError("");
         } catch (error) {
-            console.error(error);
+            if (error.response && error.response.status === 409) {
+                setUsernameTaken(true);
+                setRegistrationError("Username already exists!");
+            } else {
+                console.error("Registration error", error);
+                setRegistrationError("Failed to register, please try again later.");
+            }
         }
     };
 
@@ -58,6 +77,7 @@ function Register() {
                         onChange={handleChange}
                         required
                     />
+                    {usernameTaken && <p style={{ color: "red" }}>Username is already taken!</p>}
                 </div>
                 <div className="input-container">
                     <input
@@ -69,6 +89,11 @@ function Register() {
                         required
                     />
                 </div>
+                {!isPasswordValid && (
+                    <p style={{ color: "red" }}>
+                        Password must be at least 8 characters long and contain at least one letter, one number, and one special character.
+                    </p>
+                )}
                 <div className="input-container">
                     <input
                         type="password"
@@ -79,6 +104,7 @@ function Register() {
                         required
                     />
                 </div>
+                {!passwordMatch && <p style={{ color: "red" }}>Passwords do not match!</p>}
                 <div className="input-container">
                     <input
                         type="text"
@@ -88,7 +114,7 @@ function Register() {
                         onChange={handleChange}
                     />
                 </div>
-                {!passwordMatch && <p style={{ color: "red" }}>Passwords do not match!</p>}
+                {registrationError && <p style={{ color: "red" }}>{registrationError}</p>}
                 <button type="submit" className="register-btn">
                     Register
                 </button>

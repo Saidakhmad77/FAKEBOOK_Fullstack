@@ -17,7 +17,7 @@ jwt = JWTManager(app)
 
 db = SQLAlchemy(app)
 
-import routes
+import routes 
 
 
 
