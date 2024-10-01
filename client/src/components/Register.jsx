@@ -14,6 +14,11 @@ function Register() {
     const [isPasswordValid, setIsPasswordValid] = useState(true);
     const [usernameTaken, setUsernameTaken] = useState(false);
     const [registrationError, setRegistrationError] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     const validatePassword = (password) => {
         const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -79,31 +84,45 @@ function Register() {
                     />
                     {usernameTaken && <p style={{ color: "red" }}>Username is already taken!</p>}
                 </div>
+
                 <div className="input-container">
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                    />
+                    <div className="password-container">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            placeholder="Password"
+                            value={formData.password}
+                            onChange={handleChange}
+                            required
+                        />
+                        <span className="toggle-password-icon" onClick={togglePasswordVisibility}>
+                            {showPassword ? "🙈" : "👁️"} {/* Toggle icon */}
+                        </span>
+                    </div>
                 </div>
+
                 {!isPasswordValid && (
                     <p style={{ color: "red" }}>
                         Password must be at least 8 characters long and contain at least one letter, one number, and one special character.
                     </p>
                 )}
+
                 <div className="input-container">
-                    <input
-                        type="password"
-                        name="confirmPassword"
-                        placeholder="Confirm Password"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                        required
-                    />
+                    <div className="password-container">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            name="confirmPassword"
+                            placeholder="Confirm Password"
+                            value={formData.confirmPassword}
+                            onChange={handleChange}
+                            required
+                        />
+                        <span className="toggle-password-icon" onClick={togglePasswordVisibility}>
+                            {showPassword ? "🙈" : "👁️"} {/* Same icon logic for confirm password */}
+                        </span>
+                    </div>
                 </div>
+
                 {!passwordMatch && <p style={{ color: "red" }}>Passwords do not match!</p>}
                 <div className="input-container">
                     <input

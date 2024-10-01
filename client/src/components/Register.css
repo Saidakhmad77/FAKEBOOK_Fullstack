@@ -100,7 +100,7 @@ p {
 }
 
 
-.register-btn {
+/* .register-btn {
     width: 100%;
     padding: 12px;
     margin-top: 10px;
@@ -115,4 +115,24 @@ p {
 
 .register-btn:hover {
     background-color: #3BAC9D;
+}
+ */
+.password-container {
+    position: relative;
+    width: 91%;
+}
+
+.password-container input {
+    width: 100%;
+    padding-right: 40px; /* Adjust padding to make space for the eye icon */
+}
+
+.toggle-password-icon {
+    position: absolute;
+    right: 1px; /* Align the icon to the right */
+    top: 50%;
+    transform: translateY(-50%); /* Center the icon vertically */
+    cursor: pointer;
+    font-size: 13px; /* Adjust size if needed */
+    color: #666; /* Optional: Customize icon color */
 }
