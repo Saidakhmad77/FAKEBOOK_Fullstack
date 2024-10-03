@@ -1,1 +1,1 @@
-Sign up, Login, Comments editing, posting, deleting and getting. Also connecting multiple database tables
+Sign up: if username is already taken, it will say username is already taken. Also advanced password system using regex. Login, Comments editing, posting, deleting and getting. Also connecting multiple database tables
